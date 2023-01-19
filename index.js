@@ -22,10 +22,9 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: [
-      "http://127.0.0.1:5173",
-      "https://comfy-genie-b91d00.netlify.app/",
-    ],
+    origin: ["https://comfy-genie-b91d00.netlify.app"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.use(cookieParser());
