@@ -34,9 +34,10 @@ export const deleteTodo = async (req, res, next) => {
   }
 };
 
-export const getTodo = async (req, res, next) => {
+export const getAllTodo = async (req, res, next) => {
   try {
-    const todo = await Todo.findById(req.params.id);
+    const query = { createdBy: req.headers.username };
+    const todo = await Todo.find(query).sort({ completed: 1, createdAt: -1 });
     res.status(200).json(todo);
   } catch (err) {
     next(err);

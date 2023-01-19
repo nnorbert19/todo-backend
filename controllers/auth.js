@@ -35,10 +35,7 @@ export const register = async (req, res, next) => {
 };
 
 export const logout = async (req, res, next) => {
-  return res
-    .clearCookie("access_token")
-    .status(200)
-    .json({ message: "Successfully logged out 😏 🍀" });
+  return res.status(200).json({ message: "Successfully logged out" });
 };
 
 export const login = async (req, res, next) => {
@@ -54,19 +51,12 @@ export const login = async (req, res, next) => {
     if (!isPasswordCorrect)
       return next(createError(400, "Rossz felhasználónév vagy jelszó"));
 
-    const token = jwt.sign(
-      { id: user._id, username: user.username },
-      process.env.JWT,
-      { expiresIn: "10d" }
-    );
+    const token = jwt.sign({ id: user.username }, process.env.JWT, {
+      expiresIn: "10d",
+    });
 
     const { password, ...otherDetails } = user._doc;
-    res
-      .cookie("access_token", token, {
-        httpOnly: false,
-      })
-      .status(200)
-      .json({ ...otherDetails, token: token });
+    res.status(200).json({ ...otherDetails, token: token });
   } catch (err) {
     next(err);
   }

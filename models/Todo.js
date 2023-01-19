@@ -3,13 +3,11 @@ import mongoose from "mongoose";
 const TodoSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: [true, "Must be provided todo title"],
-    maxlength: [20, "name must be less than 20 characters"],
-    trim: true,
+    required: true,
   },
   description: {
     type: String,
-    required: [true, "Must be provided todo description"],
+    default: "",
   },
   completed: {
     type: Boolean,
@@ -18,6 +16,10 @@ const TodoSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+  createdBy: {
+    type: String,
+    required: true,
   },
 });
 
