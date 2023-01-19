@@ -19,7 +19,15 @@ const connect = async () => {
 };
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: [
+      "http://127.0.0.1:5173",
+      "https://comfy-genie-b91d00.netlify.app/",
+    ],
+  })
+);
 app.use(cookieParser());
 
 app.use("/auth", authRoute);
