@@ -24,7 +24,7 @@ app.use(
     credentials: true,
     origin: ["https://comfy-genie-b91d00.netlify.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "username", "token", "_id"],
   })
 );
 app.use(cookieParser());
